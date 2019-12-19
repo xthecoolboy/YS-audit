@@ -1,0 +1,21 @@
+{
+  "name": "YS-Main",
+  "version": "1.0.0",
+  "description": "Yumemiru Shoujo Auditor Custom Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "8.x",
+    "npm": "*"
+  },
+  "keywords": [],
+  "author": "Mai Sakurajima",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "discord.js-commando": "^0.10.0"
+  }
+}
