@@ -21,6 +21,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
       }
     };
   if (newPresence.presence.game){
+  if (newPresence.presence.equals(oldPresence.presence)) {return;}
   if (newPresence.presence.game.name === 'Taiga'){
     var cha = newPresence.guild.channels.find(c=>loggingChannels.includes(c.name))
     if (!cha) return console.log(`Channel Not Found!`)
@@ -53,6 +54,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
     }
   }
 } if (oldPresence.presence.game){
+  if (oldPresence.presence.equals(newPresence.presence)) {return;}
   if (oldPresence.presence.game.name === 'Taiga'){
     var cha = oldPresence.guild.channels.find(c=>loggingChannels.includes(c.name))
     if (!cha) return console.log(`Channel Not Found!`)
