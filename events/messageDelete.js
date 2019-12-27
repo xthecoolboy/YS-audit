@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 
 module.exports = (bot,message) => {
   const logs = ['logs','mod-logs','modlog','audits']
-  const isFemale = message.member.roles.some(r=>r.name==='Female')
   var cha = message.guild.channels.find(c=>logs.includes(c.name))
   if (!cha) return console.log(`Channel Not Found!`)
 
