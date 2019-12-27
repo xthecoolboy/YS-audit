@@ -34,7 +34,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
         var aired = (data.aired.length > 0) ? data.aired : "Not Availeble";
         var status = (data.status.length > 0) ? data.status : "Not Available";
         var episodes = (data.episodes.length > 0) ? data.episodes : "Not Available";
-
+        const episode = newPresence.presence.game.state.split('/')
         var scoring = data.score + " " + data.scoreStats;
         var score = ((data.score.length > 0) && (data.scoreStats.length > 0)) ? scoring : "Not Available";
         if (data){
