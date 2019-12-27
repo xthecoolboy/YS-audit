@@ -33,13 +33,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
         var japaneseEpisodeTitle;
         var discussionLink;
         let episodeNumber = newPresence.presence.game.state.split('/').join(' ').split(' ')
-        let epNo = Number(episodeNumber[1])
-        malScraper.getEpisodesList({name: newPresence.presence.game.details, id: data.id}).then(ep => {
-          episodeAired = (ep[epNo]) ? ep[epNo-1].aired : "Not Available"
-          japaneseEpisodeTitle = (ep[epNo]) ? ep[epNo-1].japaneseTitle : "Not Available"
-          discussionLink = (ep[epNo]) ? ep[epNo-1].discussionLink : "www.google.com"
-          console.log(ep[epNo])
-        })
+        let epNo = Number(episodeNumber[1])-1
         var image = (data.picture) ? data.picture : "www.notavailable.com";
         var url = (data.url) ? data.url : "www.notavailable.com";
         var syn = (data.synopsis) ? data.synopsis : "No Synopsis found";
@@ -56,7 +50,13 @@ module.exports = async (bot,oldPresence,newPresence) => {
           Embed.setAuthor(`${newPresence.displayName} has started watching ${newPresence.presence.game.details} ${episode[0]}`, newPresence.presence.game.assets.smallImageUrl)
           .setDescription(`No Information was found for  ${newPresence.presence.game.details}`).setTimestamp()
       }
-        Embed.setDescription(`• Episode ${episodeNumber}: [${japaneseEpisodeTitle}](${discussionLink})\n• Episode Aired: ${episodeAired}`)
+       malScraper.getEpisodesList({name: newPresence.presence.game.details, id: data.id}).then(ep => {
+          episodeAired = (ep[epNo]) ? ep[epNo].aired : "Not Available"
+          japaneseEpisodeTitle = (ep[epNo]) ? ep[epNo].japaneseTitle : "Not Available"
+          discussionLink = (ep[epNo]) ? ep[epNo].discussionLink : "www.google.com"
+         Embed.setDescription(`• Episode ${episodeNumber[1]}: [${japaneseEpisodeTitle}](${discussionLink})\n• Episode Aired: ${episodeAired}`)
+        
+        })
         var hook = await cha.createWebhook(`Taiga`,newPresence.presence.game.assets.largeImageURL)
         await hook.send(Embed).catch(console.error);
         setTimeout(async function() {
