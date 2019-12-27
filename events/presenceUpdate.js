@@ -38,7 +38,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
         var scoring = data.score + " " + data.scoreStats;
         var score = ((data.score.length > 0) && (data.scoreStats.length > 0)) ? scoring : "Not Available";
         if (data){
-          Embed.setAuthor(`${newPresence.displayName} has started watching ${episode[0]} of ${newPresence.presence.game.details}`, newPresence.presence.game.assets.smallImageUrl)
+          Embed.setAuthor(`${newPresence.displayName} has started watching ${episode[0]} of ${newPresence.presence.game.details}`, newPresence.user.displayAvatarURL)
           .addField(`Synopsis`, textTruncate(syn,250)).addField(`Aired`, aired,true).addField(`Status`,status,true).addField(`Episodes`,episodes,true).setThumbnail(image).setFooter("Score: "+score).setTimestamp()
       }else {
           Embed.setAuthor(`${newPresence.displayName} has started watching ${newPresence.presence.game.details} ${episode[0]}`, newPresence.presence.game.assets.smallImageUrl)
@@ -59,7 +59,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
     const episode = oldPresence.presence.game.state.split('/')
       const Embed = new Discord.RichEmbed()
       .setColor(settings.colors.embedDefault)
-      .setAuthor(`${oldPresence.displayName} has finished watching ${episode[0]} of ${oldPresence.presence.game.details}`, oldPresence.presence.game.assets.smallImageUrl)
+      .setAuthor(`${oldPresence.displayName} has finished watching ${episode[0]} of ${oldPresence.presence.game.details}`, oldPresence.user.displayAvatarURL)
       .setTimestamp()
       var hook = await cha.createWebhook(`Taiga`,oldPresence.presence.game.assets.largeImageURL)
       await hook.send(Embed).catch(console.error);
