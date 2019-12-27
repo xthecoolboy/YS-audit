@@ -33,10 +33,13 @@ module.exports = async (bot,oldPresence,newPresence) => {
         var japaneseEpisodeTitle;
         var discussionLink;
         let episodeNumber = newPresence.presence.game.state.split('/').join(' ').split(' ')
+        let epNo = Number(episodeNumber[1])
+        console.log(epNo)-1)
         malScraper.getEpisodesList({name: newPresence.presence.game.details, id: data.id}).then(ep => {
           episodeAired = (ep[(Number(episodeNumber[1])-1)]) ? ep[(Number(episodeNumber[1])-1)].aired : "Not Available"
           japaneseEpisodeTitle = (ep[(Number(episodeNumber[1])-1)]) ? ep[(Number(episodeNumber[1])-1)].japaneseTitle : "Not Available"
           discussionLink = (ep[(Number(episodeNumber[1])-1)]) ? ep[(Number(episodeNumber[1])-1)].discussionLink : "www.google.com"
+          console.log(ep[epNo])
         })
         var image = (data.picture) ? data.picture : "www.notavailable.com";
         var url = (data.url) ? data.url : "www.notavailable.com";
