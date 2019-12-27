@@ -32,14 +32,8 @@ module.exports = async (bot,oldPresence,newPresence) => {
         var episodeAired;
         var japaneseEpisodeTitle;
         var discussionLink;
-        let epTitleisTrue = false;
         let episodeNumber = newPresence.presence.game.state.split('/').join(' ').split(' ')
         malScraper.getEpisodesList({name: newPresence.presence.game.details, id: data.id}).then(ep => {
-          if (ep) {
-            epTitleisTrue = true;
-          } else {
-            return;
-          }
           episodeAired = (ep[episodeNumber-1]) ? ep[episodeNumber-1].aired : "Not Available"
           japaneseEpisodeTitle = (ep[episodeNumber-1]) ? ep[episodeNumber-1].japaneseTitle : "Not Available"
           discussionLink = (ep[episodeNumber-1]) ? ep[episodeNumber-1].discussionLink : "www.google.com"
@@ -60,9 +54,7 @@ module.exports = async (bot,oldPresence,newPresence) => {
           Embed.setAuthor(`${newPresence.displayName} has started watching ${newPresence.presence.game.details} ${episode[0]}`, newPresence.presence.game.assets.smallImageUrl)
           .setDescription(`No Information was found for  ${newPresence.presence.game.details}`).setTimestamp()
       }
-        if (epTitleisTrue){
         Embed.setDescription(`• Episode ${episodeNumber}: [${japaneseEpisodeTitle}](${discussionLink})\n• Episode Aired: ${episodeAired}`)
-          }
         var hook = await cha.createWebhook(`Taiga`,newPresence.presence.game.assets.largeImageURL)
         await hook.send(Embed).catch(console.error);
         setTimeout(async function() {
